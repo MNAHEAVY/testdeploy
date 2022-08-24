@@ -57,15 +57,6 @@ export function createProduct(payload) {
     }
 }
 
-export function filteredIntruments(payload) {
-    return async function (dispatch) {
-        const filter = await axios.get(`/filter?${payload}`)
-        dispatch({
-            type: FILTERED_INSTRUMENTS,
-            payload: filter.data
-        })
-    }
-}
 
 export function orderPerName(payload){
     return {
