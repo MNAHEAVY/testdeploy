@@ -38,9 +38,7 @@ export const updateProduct = (instrumentItem) => {
         });
     };
 };
-
-
-
+    
 export function createProduct(payload) {
     return async function (dispatch) {
         await axios.post('/products', payload)
