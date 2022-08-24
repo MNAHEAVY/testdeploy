@@ -39,16 +39,6 @@ export const updateProduct = (instrumentItem) => {
     };
 };
 
-export const updateProduct = (instrumentItem) => {
-    return async function (dispatch) {
-        const response = await axios.put(`${URL_PRODUCTS}/${instrumentItem._id}`,
-            instrumentItem);
-        return dispatch({
-            type: UPDATE_PRODUCT,
-            payload: response.data
-        });
-    };
-};
 
 
 export function createProduct(payload) {
