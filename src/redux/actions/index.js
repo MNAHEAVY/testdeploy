@@ -27,6 +27,23 @@ export const getAllCategories = () => {
         return dispatch({ type: GET_ALL_CATEGORIES, payload: null })
     }
 }
+export const getProductById = (instrumentId) => {
+    return function (dispatch) {
+        axios.get(`/${instrumentId}`)
+            .then(response =>
+                dispatch({
+                    type: GET_PRODUCT_BY_ID,
+                    payload: response.data
+                })
+            )
+            .catch(error =>
+                dispatch({
+                    type: GET_PRODUCT_BY_ID,
+                    payload: { error: error.message }
+                })
+            );
+    }
+}
 
 export const updateProduct = (instrumentItem) => {
     return async function (dispatch) {
