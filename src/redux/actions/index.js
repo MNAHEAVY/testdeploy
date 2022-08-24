@@ -27,17 +27,7 @@ export const getAllCategories = () => {
         return dispatch({ type: GET_ALL_CATEGORIES, payload: null })
     }
 }
-// export const createProduct = () => {
-//     return function (dispatch) {
-//         return dispatch({ type: CREATE_PRODUCT, payload: null })
-//     }
-// }
 
-// export const getInstrumentsByName = () => {
-//     return function (dispatch) {
-//         return dispatch({ type: GET_INSTRUMENT_BY_NAME, payload: null })
-//     }
-// }
 
 export const getProductById = (instrumentId) => {
     return function (dispatch) {
@@ -90,14 +80,24 @@ export function orderPerName(payload){
         payload
     }
 }
-export function getInstrumentsByName (name) {
+let queries={
+    name:"",
+    categorie:"",
+    status:"",
+    brand:""
+}
+export function filteredIntruments(payload) {
     return async function (dispatch) {
-        const search = await axios.get(`/filter?name=${name}`)
+        let condition=[];
+        queries={...queries,...payload}
+        for(const key in queries){
+            if(queries[key]) condition.push(`${key}=${queries[key]}`)
+        }
+        const filter = await axios.get(`http://localhost:4000/filter?${condition.join('&')}`)
         dispatch({
-            type: "GET_INSTRUMENTS_BY_NAME",
-            payload: search.data
+            type: FILTERED_INSTRUMENTS,
+            payload: filter.data
         })
     }
-
-
 }
+

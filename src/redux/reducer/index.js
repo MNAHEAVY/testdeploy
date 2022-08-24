@@ -2,7 +2,8 @@ const {
     GET_ALL_PRODUCTS,
     GET_PRODUCT_BY_ID,
     UPDATE_PRODUCT,
-    FILTERED_INSTRUMENTS
+    FILTERED_INSTRUMENTS,
+    CREATE_PRODUCT
 } = require('../actions/index');
 
 const initialState = {
@@ -10,7 +11,8 @@ const initialState = {
     allInstruments: [],
     favoriteInstruments: [],
     retrievedInstrument: null,
-    filteredIntruments: []
+    filteredIntruments: [],
+    
 }
 
 export default function rootReducer(state = initialState, action) {
@@ -42,7 +44,7 @@ export default function rootReducer(state = initialState, action) {
                 retrievedInstrument: action.payload
             }
 
-        case 'CREATE_PRODUCT':
+        case CREATE_PRODUCT:
                 return{
                     ...state,
                     allInstruments: [action.payload,...state.allInstruments]
@@ -53,12 +55,6 @@ export default function rootReducer(state = initialState, action) {
                 ...state, 
                 instruments: action.payload
             }
-            case 'GET_INSTRUMENTS_BY_NAME':
-                return{
-                    ...state,
-                    instruments: action.payload
-                }
-
         default:
             return state
     }
