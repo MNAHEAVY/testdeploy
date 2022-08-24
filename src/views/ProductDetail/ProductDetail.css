@@ -1,0 +1,27 @@
+.Details h1 {
+    margin-left: 2.1em;
+}
+
+.detailsInfo {
+    border-radius: .5em;
+    background-color: white;
+    display: flex;
+    margin: 3em 5em;
+    box-shadow: .5em .5em 2em #282c34;
+}
+
+.imageContainer {
+    border-radius: .5em;
+    width: 20rem;
+    margin: 1em 2em;
+}
+
+.detailsImage {
+    height: 100%;
+    width: 15rem;
+    object-fit: contain;
+}
+
+.infoContainer {
+    margin: 1.5em;
+}

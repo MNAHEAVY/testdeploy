@@ -1,0 +1,19 @@
+.Pagination{
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.pagItem{
+  list-style: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  padding: 8px;
+  border-radius: 0.3em;
+  transition: all 0.3s;
+  display: inline;
+}
+
+.pagItem:hover{
+  background-color: #b3b3b3;
+}

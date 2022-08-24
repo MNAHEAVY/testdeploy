@@ -1,0 +1,41 @@
+.card {
+  margin-right: 1%;
+  margin-bottom: 1%;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 50vh;
+}
+
+.containCardBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.containerName {
+  display: flex;
+  justify-content: center;
+}
+
+.containerListDescription {
+  width: 8rem;
+}
+
+.containCardImage {
+  margin: 1rem;
+  width: 15rem;
+}
+
+.cardImage {
+  height: 100%;
+  width: 15rem;
+  object-fit: contain;
+}
+
+.containerButton {
+  margin-right: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}

@@ -1,0 +1,56 @@
+.ProductEdit h1 {
+    margin-left: 3.3em;
+}
+
+.editInstrumentContainer {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    margin: 2em 8em;
+    padding: 2em;
+    box-shadow: .5em .5em 2em #282c34;
+    border-radius: 1em;
+}
+
+.editInstrumentTitle {
+    display: flex;
+    justify-content: center;
+}
+
+.inputLabelField {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    margin: 0 25em;
+}
+
+.inputLabelField label {
+    font-weight: bold;
+}
+
+.errorMessage {
+    color: #b50505;
+}
+
+.buttonsGroup {
+    display: flex;
+    margin: 1em;
+    justify-content: center;
+    gap: 1em;
+}
+
+.submitButton {
+    background-color: #198754;
+    color: white;
+    border-radius: .5em;
+    border: .3em solid #198754;
+}
+
+.cancelButton {
+    background-color: #b50505;
+    color: white;
+    border-radius: .5em;
+    border: .3em solid #b50505;
+}

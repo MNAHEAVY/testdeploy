@@ -1,0 +1,15 @@
+body{
+  margin: 0px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: rgba(0,0,0,.1);
+}
+
+:any-link{
+  color: #333333;
+  text-decoration: none;
+}
+
+:any-link:hover{
+  color: #333333;
+}

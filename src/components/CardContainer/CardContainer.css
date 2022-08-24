@@ -1,0 +1,51 @@
+.containerHome {
+  margin: 0%;
+  padding: 0%;
+  width: 100%
+}
+
+.containerContent {
+  display: flex;
+  justify-content: space-between;
+}
+
+.containerCards{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 70%;
+  margin-right: 2%;
+}
+
+.orderButton {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-right: 2%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0px;
+}
+
+.toglleDropDown {
+  background-color: #169E85;
+  border-color: #169E85;
+  font-size: 0.8rem !important;
+}
+.toglleDropDown:hover {
+  background-color: #4DAE9C;
+  border-color: #4DAE9C;
+}
+
+.toglleDropDown:focus {
+  background-color: #4DAE9C;
+  border-color: #4DAE9C;
+}
+
+.dropdown-item {
+  font-size: 0.7rem;
+}
+
+.dropdown-item:active {
+  background-color: #4DAE9C;
+  color: white !important;
+}
