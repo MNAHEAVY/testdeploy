@@ -13,7 +13,7 @@ function ProductEdit() {
     const regexUrl = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z\d@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z\d@:%_+.~#?&/=]*)/g;
 
     const dispatch = useDispatch();
-    const instrumentRetrieved = useSelector((state) => state.retrievedInstrument)
+    const instrumentRetrieved = useSelector((state) => state.retrievedInstrument);
     const {id} = useParams();
     const navigate = useNavigate();
 
@@ -22,10 +22,10 @@ function ProductEdit() {
         name: '',
         price: 1.0,
         description: '',
-        image: '',
+        image: [],
         stock: 0,
         color: '',
-        categorie: '',
+        category: [],
         brand: '',
         location: '',
         status: '',
@@ -35,10 +35,9 @@ function ProductEdit() {
         name: '',
         price: '',
         description: '',
-        imagen: '',
+        image: '',
         stock: '',
         color: '',
-        categorie: '',
         brand: '',
         location: '',
         status: '',
@@ -58,7 +57,7 @@ function ProductEdit() {
 
     function renderInstrument() {
         if (!instrumentRetrieved || (id !== instrumentRetrieved._id && !instrumentRetrieved.error)) {
-            return <Loading />;
+            return <Loading/>;
         }
         if (instrumentRetrieved.error) {
             return (
@@ -68,6 +67,37 @@ function ProductEdit() {
             );
         }
         return renderForm(instrumentItem);
+    }
+
+    function renderProductCategories() {
+        if (!instrumentItem.category || instrumentItem.category.length === 0) {
+            return '';
+        }
+        return instrumentItem.category.map((item, index) =>
+            <option key={index}
+                    value={item}
+            >{item}</option>
+        );
+    }
+
+    function handleCategoryPlusChange(event) {
+        const result = instrumentItem.category.find(item =>
+            item.toLowerCase() === event.target.value.toLowerCase())
+        if (result) {
+            return;
+        }
+        setInstrumentItem({
+            ...instrumentItem,
+            category: [...instrumentItem.category, event.target.value]
+        })
+    }
+
+    function handleCategoryMinusChange(event) {
+        setInstrumentItem({
+            ...instrumentItem,
+            category: instrumentItem.category.filter(item =>
+                item.toLowerCase() !== event.target.value.toLowerCase())
+        })
     }
 
     function renderForm(instrumentItem) {
@@ -99,11 +129,11 @@ function ProductEdit() {
                     <div className='inputLabelField'>
                         <label>Description: </label>
                         <textarea placeholder='Instrument description'
-                               onChange={(e) => handleChange(e)}
-                               onBlur={() => validateAlpha('description', instrumentItem.description)}
-                               value={instrumentItem.description}
-                               name={'description'}
-                               rows={4} />
+                                  onChange={(e) => handleChange(e)}
+                                  onBlur={() => validateAlpha('description', instrumentItem.description)}
+                                  value={instrumentItem.description}
+                                  name={'description'}
+                                  rows={4}/>
                         <span className="errorMessage">{errorInfo.description}</span>
                     </div>
 
@@ -111,10 +141,10 @@ function ProductEdit() {
                         <label>Image: </label>
                         <p>{instrumentItem.image} </p> {/*<input placeholder='Instrument image' //todo update - to handle array.
                                onChange={(e) => handleChange(e)}
-                               onBlur={() => validateUrl('imagen', instrumentItem.imagen)}
-                               value={instrumentItem.imagen}
-                               type='text' name={'imagen'}/>*/}
-                        <span className="errorMessage">{errorInfo.imagen}</span>
+                               onBlur={() => validateUrl('image', instrumentItem.image)}
+                               value={instrumentItem.image}
+                               type='text' name={'image'}/>*/}
+                        <span className="errorMessage">{errorInfo.image}</span>
                     </div>
 
                     <div className='inputLabelField'>
@@ -137,14 +167,27 @@ function ProductEdit() {
                         <span className="errorMessage">{errorInfo.color}</span>
                     </div>
 
-                    <div className='inputLabelField'>
-                        <label>Category: </label>
-                        <p>{instrumentItem.categorie} </p> {/*<input placeholder='Instrument category' //todo update - to handle array.
-                               onChange={(e) => handleChange(e)}
-                               onBlur={() => validateAlpha('category', instrumentItem.categorie[0])}
-                               value={instrumentItem.categorie[0]}
-                               type='text' name={'categorie'}/>*/}
-                        <span className="errorMessage">{errorInfo.categorie}</span>
+                    <div className="selectGroup">
+                        <div className='selectLabelField'>
+                            <label>Available Categories:</label>
+                            <select size={5}
+                                    onChange={(e) => handleCategoryPlusChange(e)}
+                            >
+                                <option> Wind</option>
+                                <option> Electric</option>
+                                <option> Percussion</option>
+                                <option> String</option>
+                            </select>
+                        </div>
+
+                        <div className='selectLabelField'>
+                            <label>Selected Categories: </label>
+                            <select size={5}
+                                    onChange={(e) => handleCategoryMinusChange(e)}
+                            >
+                                {renderProductCategories()}
+                            </select>
+                        </div>
                     </div>
 
                     <div className='inputLabelField'>
@@ -208,18 +251,16 @@ function ProductEdit() {
         const errorName = validateAlpha('name', instrumentItem.name);
         const errorPrice = validateDecimal('price', instrumentItem.price);
         const errorDescription = validateAlpha('description', instrumentItem.description);
-        const errorImage = false; //validateUrl('imagen', instrumentItem.imagen[0]); //todo - update to handle array
+        const errorImage = false; //validateUrl('image', instrumentItem.image[0]); //todo - update to handle array
         const errorStock = validateInteger('stock', instrumentItem.stock);
         const errorColor = validateAlpha('color', instrumentItem.color);
-        const errorCategory = false; //validateAlpha('category', instrumentItem.categorie[0]); //todo - update to handle array
         const errorBrand = validateAlpha('brand', instrumentItem.brand);
         const errorLocation = validateAlpha('location', instrumentItem.location);
         const errorStatus = validateAlpha('status', instrumentItem.status);
 
         return errorName || errorPrice || errorDescription ||
                errorImage || errorStock || errorColor ||
-               errorCategory || errorBrand || errorLocation ||
-               errorStatus;
+               errorBrand || errorLocation || errorStatus;
     }
 
     function validateInteger(key, value) {

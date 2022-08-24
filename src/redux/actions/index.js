@@ -28,25 +28,6 @@ export const getAllCategories = () => {
     }
 }
 
-
-export const getProductById = (instrumentId) => {
-    return function (dispatch) {
-        axios.get(`/${instrumentId}`)
-            .then(response =>
-                dispatch({
-                    type: GET_PRODUCT_BY_ID,
-                    payload: response.data
-                })
-            )
-            .catch(error =>
-                dispatch({
-                    type: GET_PRODUCT_BY_ID,
-                    payload: { error: error.message }
-                })
-            );
-    }
-}
-
 export const updateProduct = (instrumentItem) => {
     return async function (dispatch) {
         const response = await axios.put(`/${instrumentItem._id}`,
@@ -57,6 +38,18 @@ export const updateProduct = (instrumentItem) => {
         });
     };
 };
+
+export const updateProduct = (instrumentItem) => {
+    return async function (dispatch) {
+        const response = await axios.put(`${URL_PRODUCTS}/${instrumentItem._id}`,
+            instrumentItem);
+        return dispatch({
+            type: UPDATE_PRODUCT,
+            payload: response.data
+        });
+    };
+};
+
 
 export function createProduct(payload) {
     return async function (dispatch) {
@@ -93,7 +86,7 @@ export function filteredIntruments(payload) {
         for(const key in queries){
             if(queries[key]) condition.push(`${key}=${queries[key]}`)
         }
-        const filter = await axios.get(`http://localhost:4000/filter?${condition.join('&')}`)
+        const filter = await axios.get(`/filter?${condition.join('&')}`)
         dispatch({
             type: FILTERED_INSTRUMENTS,
             payload: filter.data

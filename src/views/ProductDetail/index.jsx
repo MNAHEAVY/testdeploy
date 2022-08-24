@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect} from "react";
 import {getProductById} from "../../redux/actions";
 import {useDispatch, useSelector} from "react-redux";
@@ -16,14 +18,21 @@ function ProductDetail() {
         if (!instrumentItem || (id !== instrumentItem._id && !instrumentItem.error)) {
             dispatch(getProductById(id));
         }
-    }, [dispatch, instrumentItem])
+    }, [dispatch, instrumentItem, id])
 
     function handleEdit() {
         navigate(`/edit/${id}`);
     }
 
+
+    function renderCategories() {
+        if (!instrumentItem || instrumentItem.category.length === 0) {
+            return 'N/A';
+        }
+        return instrumentItem.category.join(',');
+    }
+
     function renderInstrument() {
-        console.log("renderInstrument", instrumentItem)
         if (!instrumentItem || (id !== instrumentItem._id && !instrumentItem.error)) {
             return <Loading />;
         }
@@ -37,7 +46,7 @@ function ProductDetail() {
         return (
             <div className="detailsInfo">
                 <div className="imageContainer">
-                    <img className="detailsImage" src={instrumentItem.image[0]} alt="Instrument image"/>
+                    <img className="detailsImage" src={instrumentItem.image[0]} alt="Instrument"/>
                 </div>
                 <div className="infoContainer">
                     <h1>{instrumentItem.name}</h1>
@@ -46,7 +55,7 @@ function ProductDetail() {
                     <p><b>Description: </b>{instrumentItem.description}</p>
                     <p><b>Stock: </b>{instrumentItem.stock}</p>
                     <p><b>Color: </b>{instrumentItem.color}</p>
-                    <p><b>Category: </b>{instrumentItem.categorie}</p>
+                    <p><b>Categories: </b>{renderCategories()}</p>
                     <p><b>Brand: </b>{instrumentItem.brand}</p>
                     <p><b>Location: </b>{instrumentItem.location}</p>
                     <p><b>Status: </b>{instrumentItem.status}</p>

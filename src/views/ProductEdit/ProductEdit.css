@@ -23,7 +23,15 @@
     justify-content: center;
     align-content: center;
     flex-direction: column;
-    margin: 0 25em;
+    margin: 0 20%;
+}
+
+.selectLabelField {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    margin: 0;
 }
 
 .inputLabelField label {
@@ -39,6 +47,14 @@
     margin: 1em;
     justify-content: center;
     gap: 1em;
+}
+
+.selectGroup {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    gap: 30%;
+    margin: 0 10%;
 }
 
 .submitButton {
