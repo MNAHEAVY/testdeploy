@@ -3,19 +3,18 @@ import './CookieCard.css'
 
 export default function CookieCard() {
 
-
-  console.log(localStorage.getItem('localstorage'));
   useEffect(() => {
     if (localStorage.getItem('localstorage') === 'true') {
-      console.log('localstorage === true');
       const CookieDiv = document.getElementById('Cookie')
       CookieDiv.classList.add('Accepted')
     }
   })
+
   const acceptCookies = () => {
     const CookieDiv = document.getElementById('Cookie')
     CookieDiv.classList.add('Accepted')
     localStorage.setItem('localstorage', true)
+    localStorage.setItem('lightTheme', true)
   }
 
   return (

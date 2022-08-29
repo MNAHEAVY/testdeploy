@@ -3,6 +3,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 2em;
 }
 
 .dividerAboutUs {
@@ -65,4 +66,8 @@
 .PageTitle {
   margin-top: 2rem;
   text-align: center;
+}
+
+.textAboutUs {
+  font-size: 1.3em;
 }

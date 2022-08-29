@@ -14,3 +14,7 @@
     height: 25rem;
     object-fit: contain;
 }
+
+.carousel-item {
+    transition: transform .6s ease-in-out !important;
+}

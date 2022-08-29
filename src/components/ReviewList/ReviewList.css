@@ -1,0 +1,35 @@
+.reviewListContainer {
+    border-radius: 0.5em;
+    justify-content: space-around;
+    background-color: white;
+    margin: 3em 5em;
+    box-shadow: 0.5em 0.5em 2em #282c34;
+}
+
+.reviewItem {
+    margin: 1em;
+}
+
+.reviewListGrid {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.ratingTotal {
+    display: flex;
+    text-align: center;
+    margin: 1em;
+    padding-top: 1em;
+    align-items: flex-end;
+    flex-direction: row;
+    align-content: center;
+}
+
+.ratingText {
+    padding-top: 1%;
+}
+
+.ratingUserItem {
+    display: flex;
+    margin-bottom: 0;
+}

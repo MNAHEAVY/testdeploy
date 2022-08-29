@@ -5,7 +5,10 @@ import {getProductById} from "../../redux/actions";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate, useParams} from "react-router-dom";
 import './ProductDetail.css';
-import Loading from "../../components/Loading";
+import Loading from "../../components/Loading/Loading";
+import Carousel from "react-bootstrap/Carousel";
+import ReviewList from "../../components/ReviewList";
+import ReviewForm from "../../components/ReviewForm";
 
 function ProductDetail() {
 
@@ -24,17 +27,36 @@ function ProductDetail() {
         navigate(`/edit/${id}`);
     }
 
-
     function renderCategories() {
-        if (!instrumentItem || instrumentItem.category.length === 0) {
+        if (!instrumentItem ||
+            !instrumentItem.category ||
+            instrumentItem.category.length === 0) {
             return 'N/A';
         }
-        return instrumentItem.category.join(',');
+        return instrumentItem.category.join(', ');
+    }
+
+    function renderImageItem() {
+        if (!instrumentItem ||
+            !instrumentItem.image ||
+            instrumentItem.image.length === 0) {
+            return '';
+        }
+        return (
+            instrumentItem.image.map((imageItem, index) => {
+                return <Carousel.Item interval={3000} key={index}>
+                            <img className="imageCarousel"
+                                 src={imageItem}
+                                 alt={index}
+                            />
+                       </Carousel.Item>
+            })
+        );
     }
 
     function renderInstrument() {
         if (!instrumentItem || (id !== instrumentItem._id && !instrumentItem.error)) {
-            return <Loading />;
+            return <Loading/>;
         }
         if (instrumentItem.error) {
             return (
@@ -43,10 +65,13 @@ function ProductDetail() {
                 </h4>
             );
         }
+
         return (
-            <div className="detailsInfo">
+            <div className='detailsContainer'>
                 <div className="imageContainer">
-                    <img className="detailsImage" src={instrumentItem.image[0]} alt="Instrument"/>
+                    <Carousel className='productDetailCarousel' variant="dark">
+                        {renderImageItem()}
+                    </Carousel>
                 </div>
                 <div className="infoContainer">
                     <h1>{instrumentItem.name}</h1>
@@ -62,16 +87,21 @@ function ProductDetail() {
                     <button className='submitButton'
                             type='button'
                             onClick={() => handleEdit()}
-                    >Edit</button>
+                    >Edit
+                    </button>
                 </div>
             </div>
         );
     }
 
     return (
-        <div className='Details'>
-            <h1>Product Details</h1>
-            {renderInstrument()}
+        <div>
+            <div className='Details'>
+                <h1>Product Details</h1>
+                {renderInstrument()}
+            </div>
+            <ReviewForm productId={id}/>
+            <ReviewList productId={id}/>
         </div>
     );
 }

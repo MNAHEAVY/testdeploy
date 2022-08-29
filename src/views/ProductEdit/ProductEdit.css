@@ -26,6 +26,19 @@
     margin: 0 20%;
 }
 
+.addImageField {
+    display: flex;
+    justify-content: space-between;
+}
+
+.addImageField input {
+    width: 85%;
+}
+
+.addImageField select {
+    width: 85%;
+}
+
 .selectLabelField {
     display: flex;
     justify-content: center;
@@ -35,6 +48,10 @@
 }
 
 .inputLabelField label {
+    font-weight: bold;
+}
+
+.selectLabelField label {
     font-weight: bold;
 }
 
@@ -57,11 +74,27 @@
     margin: 0 10%;
 }
 
-.submitButton {
-    background-color: #198754;
+.addImageButton {
+    background-color: #169E85;
     color: white;
     border-radius: .5em;
-    border: .3em solid #198754;
+    border: .3em solid #169E85;
+}
+
+.removeImageButton {
+    margin: 1em 0;
+    background-color: #b50505;
+    color: white;
+    border-radius: .5em;
+    height: 2.5em;
+    border: 1px solid #b50505;
+}
+
+.submitButton {
+    background-color: #169E85;
+    color: white;
+    border-radius: .5em;
+    border: .3em solid #169E85;
 }
 
 .cancelButton {

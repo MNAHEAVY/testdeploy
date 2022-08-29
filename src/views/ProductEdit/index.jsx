@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useNavigate, useParams} from "react-router-dom";
 import {getProductById, updateProduct} from "../../redux/actions";
 import './ProductEdit.css';
-import Loading from "../../components/Loading";
+import Loading from "../../components/Loading/Loading";
 
 function ProductEdit() {
 
@@ -43,6 +43,9 @@ function ProductEdit() {
         status: '',
     });
 
+    const [selectedImage, setSelectedImage] = React.useState('');
+    const [newImage, setNewImage] = React.useState('');
+
     function handleChange(event) {
         setInstrumentItem({...instrumentItem, [event.target.name]: event.target.value})
     }
@@ -78,6 +81,64 @@ function ProductEdit() {
                     value={item}
             >{item}</option>
         );
+    }
+
+    function handleChangeNewImage(event) {
+        setNewImage(event.target.value);
+    }
+
+    function renderImageList() {
+        if (!instrumentItem.image || instrumentItem.image.length === 0) {
+            return '';
+        }
+        return instrumentItem.image.map((item, index) =>
+            <option key={index}
+                    value={item}
+            >{item}</option>
+        );
+    }
+
+    function handleSelectedImage(event) {
+        setSelectedImage(event.target.value);
+    }
+
+    function handleImageRemoveChange() {
+        if (selectedImage.length === 0) {
+            setErrorInfo({
+                ...errorInfo,
+                image: 'Please select an image before click the Remove button.'
+            });
+            return;
+        }
+        setErrorInfo({
+            ...errorInfo,
+            image: ''
+        });
+        setSelectedImage('');
+        setInstrumentItem({
+            ...instrumentItem,
+            image: instrumentItem.image.filter(item =>
+                item !== selectedImage)
+        });
+    }
+
+    function handleImageAddChange() {
+        if (newImage.length === 0) {
+            setErrorInfo({
+                ...errorInfo,
+                image: "Please add a valid image's url before click the Add button."
+            });
+            return;
+        }
+        setErrorInfo({
+            ...errorInfo,
+            image: ''
+        });
+        setNewImage('');
+        setInstrumentItem({
+            ...instrumentItem,
+            image: [...instrumentItem.image, newImage]
+        });
     }
 
     function handleCategoryPlusChange(event) {
@@ -138,13 +199,39 @@ function ProductEdit() {
                     </div>
 
                     <div className='inputLabelField'>
-                        <label>Image: </label>
-                        <p>{instrumentItem.image} </p> {/*<input placeholder='Instrument image' //todo update - to handle array.
-                               onChange={(e) => handleChange(e)}
-                               onBlur={() => validateUrl('image', instrumentItem.image)}
-                               value={instrumentItem.image}
-                               type='text' name={'image'}/>*/}
+                        <label>Url Image: </label>
+                        <div className="addImageField">
+                            <input placeholder='Instrument image'
+                                   onChange={(e) => handleChangeNewImage(e)}
+                                   onBlur={() => validateUrl('image', newImage)}
+                                   value={newImage}
+                                   type='text' name={'image'}/>
+                            <button className='addImageButton'
+                                    type='button'
+                                    onClick={() => handleImageAddChange()}
+
+                            >Add Image
+                            </button>
+                        </div>
                         <span className="errorMessage">{errorInfo.image}</span>
+
+                    </div>
+
+                    <div className='inputLabelField'>
+                        <label>Added Images: </label>
+                        <div className="addImageField">
+                            <select size={5}
+                                    onChange={(e) => handleSelectedImage(e)}
+                            >
+                                {renderImageList()}
+                            </select>
+                            <button className='removeImageButton'
+                                    type='button'
+                                    onClick={() => handleImageRemoveChange()}
+                            >Remove Image
+                            </button>
+                        </div>
+
                     </div>
 
                     <div className='inputLabelField'>
@@ -251,7 +338,6 @@ function ProductEdit() {
         const errorName = validateAlpha('name', instrumentItem.name);
         const errorPrice = validateDecimal('price', instrumentItem.price);
         const errorDescription = validateAlpha('description', instrumentItem.description);
-        const errorImage = false; //validateUrl('image', instrumentItem.image[0]); //todo - update to handle array
         const errorStock = validateInteger('stock', instrumentItem.stock);
         const errorColor = validateAlpha('color', instrumentItem.color);
         const errorBrand = validateAlpha('brand', instrumentItem.brand);
@@ -259,15 +345,15 @@ function ProductEdit() {
         const errorStatus = validateAlpha('status', instrumentItem.status);
 
         return errorName || errorPrice || errorDescription ||
-               errorImage || errorStock || errorColor ||
-               errorBrand || errorLocation || errorStatus;
+               errorStock || errorColor || errorBrand ||
+               errorLocation || errorStatus;
     }
 
     function validateInteger(key, value) {
         let message = ''
         let result = false;
         if (!regexInteger.test(value)) {
-            message = 'The value should contain only numbers.'
+            message = 'The value should contain only whole numbers.'
             result = true;
         }
         setErrorInfo({
@@ -309,7 +395,7 @@ function ProductEdit() {
         let message = ''
         let result = false;
         if (!regexUrl.test(value)) {
-            message = 'The value should contain only a Url.'
+            message = 'The value should contain a valid Url.'
             result = true;
         }
         setErrorInfo({
