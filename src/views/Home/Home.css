@@ -1,0 +1,85 @@
+
+.containerHome {
+    display: flex;
+    flex-direction: column;
+    padding-left: 3em;
+    padding-right: 3em;
+    width: 100%;
+    min-height: 72vh;
+}
+
+.containerContent {
+    display: flex;
+    align-items: flex-start;
+    gap: 1em;
+    margin-bottom: 1em;
+}
+
+.containerCards{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 72%;
+    gap: 1em;
+}
+
+.cardRating {
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 2.5em !important;
+    width: 7.5em !important;
+}
+
+.cardStar {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #888;
+}
+
+.cardStarActive {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #169E85;
+}
+
+.MuiFormControl-root {
+    display: flex !important;
+    margin-left: auto !important;
+    margin-top: 0 !important;
+    border: none !important;
+}
+
+.ocult {
+    opacity: 0;
+}
+
+.css-a3l6o-MuiInputBase-root-MuiInput-root-MuiSelect-root:hover:not(.Mui-disabled)::before {
+    border-bottom: none !important;
+}
+
+.css-a3l6o-MuiInputBase-root-MuiInput-root-MuiSelect-root::before {
+    border-bottom: none !important;
+}
+
+.css-a3l6o-MuiInputBase-root-MuiInput-root-MuiSelect-root::after {
+    border-bottom: none !important;
+}
+
+.css-1c2i806-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
+    color: rgba(0, 0, 0, 0.6) !important; 
+}
+
+.aditionalContent {
+    display: flex;
+    align-items: center;
+}
+
+.numberOfResults {
+    font-size: .9em;
+}
+
+.numberOfResults span {
+    font-weight: 600;
+}

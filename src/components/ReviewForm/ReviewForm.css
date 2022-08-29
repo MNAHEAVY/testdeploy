@@ -1,0 +1,26 @@
+.ratingContainer {
+    border-radius: .5em;
+    background-color: white;
+    margin: 3em 5em;
+    box-shadow: .5em .5em 2em #282c34;
+    display: flex;
+    flex-direction: column;
+}
+
+.starRating {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    margin: 0 20%;
+}
+
+.submitReviewButton {
+    background-color: #169E85;
+    color: white;
+    border-radius: 0.5em;
+    margin: 1em auto;
+    border: 0.3em solid #169E85;
+}

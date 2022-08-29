@@ -2,7 +2,7 @@
     margin-left: 2.1em;
 }
 
-.detailsInfo {
+.detailsContainer {
     border-radius: .5em;
     background-color: white;
     display: flex;
@@ -22,6 +22,25 @@
     object-fit: contain;
 }
 
+.productDetailCarousel {
+    width: 20rem;
+    height: 30rem;
+    transition: all ease 0.5s;
+    margin-bottom: 1rem;
+}
+
 .infoContainer {
     margin: 1.5em;
+}
+
+.imageList {
+    margin: 2em;
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+.imageItem {
+    width: 40%;
+    margin: auto auto 1em;
+    height: auto;
 }

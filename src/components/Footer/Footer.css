@@ -1,5 +1,5 @@
 .footer {
-    margin-top: 2rem;
+    margin-top: auto;
     padding: 0.5rem;
     display: flex;
     justify-content: space-around;
@@ -7,4 +7,8 @@
 
 .terms {
     font-size: 0.7rem;
+}
+
+.footerAboutUs:hover {
+    color: #dddddd;
 }
